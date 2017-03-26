@@ -39,47 +39,21 @@ public class HomeController {
 		 AnimatedGifEncoder e = new AnimatedGifEncoder();
 		    e.start("test_result.gif");
 		    e.setDelay(50);   // 1 frame per sec
-		    e.addFrame(ImageIO.read(new File("storage/test_1.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_2.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_3.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_4.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_5.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_6.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_7.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_8.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_9.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_10.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_11.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_12.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_13.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_14.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_15.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_16.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_17.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_18.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_19.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_20.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_21.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_22.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_23.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_24.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_25.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_26.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_27.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_28.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_29.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_30.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_31.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_32.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_33.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_34.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_35.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_36.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_37.png")));
-		    e.addFrame(ImageIO.read(new File("storage/test_38.png")));
+		    String path="storage/";
+    		File dirFile=new File(path);
+    		File []fileList=dirFile.listFiles();
+    		
+    		for(File tempFile : fileList) {
+    		  if(tempFile.isFile() && tempFile.getName().substring(tempFile.getName().length() - 3, tempFile.getName().length()).equals("png")) {
+    		    String tempPath=tempFile.getParent();
+    		    String tempFileName=tempFile.getName();
+    		    System.out.println("Path="+tempPath);
+    		    System.out.println("FileName="+tempFileName);
+    		    
+    		    e.addFrame(ImageIO.read(new File(tempPath + "/" + tempFileName)));
+    		  }
+    		}
 		    e.finish();
-		
-		logger.info("animatedGifEncoder : ", e.toString());
 		
 		return "home";
 	}
